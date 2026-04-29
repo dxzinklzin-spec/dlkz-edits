@@ -10,46 +10,47 @@ body {
     margin: 0;
     font-family: Arial;
     color: white;
+    overflow: hidden;
     background: black;
-    overflow-x: hidden;
 }
 
-/* FUNDO ANIMADO */
-body::before {
-    content: "";
+/* SANGUE ESCORRENDO */
+.blood {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 20%, rgba(255,0,0,0.3), transparent),
-                radial-gradient(circle at 70% 80%, rgba(150,0,0,0.4), transparent);
-    animation: sangueMove 8s infinite alternate;
-    z-index: -2;
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    width: 200%;
-    height: 200%;
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(255,0,0,0.05) 0px,
-        rgba(255,0,0,0.05) 2px,
-        transparent 2px,
-        transparent 6px
-    );
-    animation: movimento 15s linear infinite;
+    overflow: hidden;
     z-index: -1;
 }
 
-@keyframes sangueMove {
-    0% {transform: translate(0,0);}
-    100% {transform: translate(-50px, 50px);}
+.drop {
+    position: absolute;
+    top: -120px;
+    width: 10px;
+    height: 120px;
+    background: radial-gradient(circle, #ff0000, #8b0000);
+    border-radius: 50%;
+    animation: cair linear infinite;
 }
 
-@keyframes movimento {
-    0% {transform: translate(0,0);}
-    100% {transform: translate(-200px, -200px);}
+@keyframes cair {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(120vh); opacity: 0.7; }
+}
+
+/* SLIDE */
+.container {
+    display: flex;
+    width: 200%;
+    transition: 0.6s;
+}
+
+.page {
+    width: 100vw;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    border: 2px solid red;
 }
 
 /* INTRO */
@@ -72,42 +73,8 @@ body::after {
 
 @keyframes piscar {
     0% {opacity:1;}
-    50% {opacity:0.4;}
+    50% {opacity:0.3;}
     100% {opacity:1;}
-}
-
-/* CONTEÚDO */
-#conteudo {
-    display: none;
-}
-
-section {
-    padding: 60px 20px;
-    text-align: center;
-}
-
-h1 {
-    color: red;
-}
-
-/* IMAGENS */
-img {
-    max-width: 90%;
-    border-radius: 10px;
-    box-shadow: 0 0 20px red;
-}
-
-/* SOBRE */
-.sobre {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.sobre-texto {
-    max-width: 400px;
-    text-align: left;
 }
 
 /* BOTÃO */
@@ -117,104 +84,72 @@ img {
     background: red;
     border: none;
     color: white;
-    font-size: 16px;
     border-radius: 10px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* ANIMAÇÃO SCROLL */
-.fade {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 1s;
+.btn:hover {
+    background: darkred;
+    transform: scale(1.05);
 }
 
-.fade.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* DEDOS (OPCIONAL) */
-.fundo-dedos {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url('dedos.png') no-repeat center;
-    background-size: cover;
-    opacity: 0.07;
-    animation: dedosMove 10s infinite alternate;
-    z-index: -1;
-}
-
-@keyframes dedosMove {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+h1 {
+    color: red;
 }
 </style>
 </head>
 
 <body>
 
+<!-- SANGUE -->
+<div class="blood">
+    <div class="drop" style="left:5%; animation-duration:5s;"></div>
+    <div class="drop" style="left:15%; animation-duration:7s;"></div>
+    <div class="drop" style="left:25%; animation-duration:6s;"></div>
+    <div class="drop" style="left:35%; animation-duration:8s;"></div>
+    <div class="drop" style="left:50%; animation-duration:5s;"></div>
+    <div class="drop" style="left:65%; animation-duration:9s;"></div>
+    <div class="drop" style="left:75%; animation-duration:6s;"></div>
+    <div class="drop" style="left:85%; animation-duration:7s;"></div>
+</div>
+
 <!-- INTRO -->
 <div id="intro">
     <h1>DLKZ MOTION</h1>
 </div>
 
-<!-- SITE -->
-<div id="conteudo">
+<div id="site" style="display:none;">
 
-<div class="fundo-dedos"></div>
+<div class="container" id="container">
 
-<!-- HOME -->
-<section>
+<!-- PÁGINA 1 -->
+<div class="page">
     <h1>Oiiii, tudo bem? 👋</h1>
     <p>
     Aqui é o dlkz77cc 🎬<br>
-    Sou editor de vídeo<br>
-    Role a página 👇
+    Editor de vídeo profissional<br>
+    Clique para ver mais 👉
     </p>
 
-    <img src="imagem2.png" alt="banner">
-
+    <button class="btn" onclick="irPagina(1)">VER MAIS ➡️</button>
     <br>
-    <button class="btn" onclick="zap()">CHAMAR NO WHATSAPP 🔥</button>
-</section>
+    <button class="btn" onclick="zap()">WHATSAPP 📩</button>
+</div>
 
-<!-- SOBRE -->
-<section class="fade">
-    <h1>SOBRE MIM</h1>
+<!-- PÁGINA 2 -->
+<div class="page">
+    <h1>💰 PAGAMENTO</h1>
 
-    <div class="sobre">
-        <div class="sobre-texto">
-            Sou editor focado em qualidade e impacto.<br><br>
+    <p style="font-size:20px;">
+    💸 PIX<br><br>
+    Pagamento rápido e seguro ⚡
+    </p>
 
-            Trabalho com anime, futebol e fotos.<br><br>
+    <button class="btn" onclick="irPagina(0)">⬅️ VOLTAR</button>
+</div>
 
-            Utilizo Toji Motion para edições profissionais.<br><br>
-
-            ✔️ Qualidade<br>
-            ✔️ Rapidez<br>
-            ✔️ Preço acessível
-        </div>
-
-        <img src="imagem1.png" alt="personagem">
-    </div>
-</section>
-
-<!-- PREÇOS -->
-<section class="fade">
-    <h1>PREÇOS</h1>
-    📸 Foto: 2 reais<br>
-    💧 Sem marca d'água: +3<br>
-    🎬 Anime: 10<br>
-    ⚽ Futebol: 15
-</section>
-
-<!-- CONTATO -->
-<section class="fade">
-    <h1>CONTATO</h1>
-    <button class="btn" onclick="zap()">CHAMAR NO WHATSAPP 📩</button>
-</section>
+</div>
 
 </div>
 
@@ -222,23 +157,19 @@ img {
 window.onload = () => {
     setTimeout(() => {
         document.getElementById("intro").style.display = "none";
-        document.getElementById("conteudo").style.display = "block";
+        document.getElementById("site").style.display = "block";
     }, 2000);
 };
+
+function irPagina(num) {
+    document.getElementById("container").style.transform = "translateX(-" + (num * 100) + "vw)";
+}
 
 function zap() {
     let numero = "5511951319587";
     let mensagem = "Oi, vim pelo site DLKZ e quero um edit!";
     window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`, "_blank");
 }
-
-window.addEventListener('scroll', () => {
-    document.querySelectorAll('.fade').forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-            el.classList.add('show');
-        }
-    });
-});
 </script>
 
 </body>
