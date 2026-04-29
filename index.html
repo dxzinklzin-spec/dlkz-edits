@@ -135,6 +135,20 @@ select, textarea {
 .active {
     display: block;
 }
+
+/* BANNER */
+.banner {
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px red;
+    transition: 0.3s;
+}
+
+.banner:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px red;
+}
 </style>
 </head>
 
@@ -159,6 +173,9 @@ select, textarea {
         <button onclick="abrir('pedido')">🎬 Fazer pedido</button>
         <button onclick="zap()">📱 Chamar no WhatsApp</button>
     </div>
+
+    <!-- IMAGEM AQUI -->
+    <img src="banner.png" class="banner">
 </div>
 
 <!-- PAGAMENTO -->
