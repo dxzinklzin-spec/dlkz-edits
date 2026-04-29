@@ -3,15 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DLKZ EDITS</title>
+<title>DLKZ MOTION</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: black;
+    font-family: Arial;
     color: white;
-    scroll-behavior: smooth;
+    background: black;
+    overflow-x: hidden;
+}
+
+/* FUNDO ANIMADO */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(255,0,0,0.3), transparent),
+                radial-gradient(circle at 70% 80%, rgba(150,0,0,0.4), transparent);
+    animation: sangueMove 8s infinite alternate;
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255,0,0,0.05) 0px,
+        rgba(255,0,0,0.05) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    animation: movimento 15s linear infinite;
+    z-index: -1;
+}
+
+@keyframes sangueMove {
+    0% {transform: translate(0,0);}
+    100% {transform: translate(-50px, 50px);}
+}
+
+@keyframes movimento {
+    0% {transform: translate(0,0);}
+    100% {transform: translate(-200px, -200px);}
+}
+
+/* INTRO */
+#intro {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#intro h1 {
+    color: red;
+    font-size: 50px;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    0% {opacity:1;}
+    50% {opacity:0.4;}
+    100% {opacity:1;}
+}
+
+/* CONTEÚDO */
+#conteudo {
+    display: none;
 }
 
 section {
@@ -19,42 +86,21 @@ section {
     text-align: center;
 }
 
-.dark-bg {
-    background: linear-gradient(180deg, black, #0a0000, black);
-}
-
 h1 {
     color: red;
-    font-size: 2em;
 }
 
-.btn {
-    background: red;
-    color: white;
-    padding: 15px 25px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: darkred;
-    transform: scale(1.05);
-}
-
+/* IMAGENS */
 img {
     max-width: 90%;
     border-radius: 10px;
-    margin-top: 20px;
+    box-shadow: 0 0 20px red;
 }
 
+/* SOBRE */
 .sobre {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
     gap: 20px;
 }
@@ -64,6 +110,19 @@ img {
     text-align: left;
 }
 
+/* BOTÃO */
+.btn {
+    margin-top: 20px;
+    padding: 15px 25px;
+    background: red;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ANIMAÇÃO */
 .fade {
     opacity: 0;
     transform: translateY(20px);
@@ -74,85 +133,108 @@ img {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* DEDOS */
+.fundo-dedos {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('dedos.png') no-repeat center;
+    background-size: cover;
+    opacity: 0.07;
+    animation: dedosMove 10s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes dedosMove {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
 </style>
 </head>
 
-<body class="dark-bg">
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+    <h1>DLKZ MOTION</h1>
+</div>
+
+<!-- SITE -->
+<div id="conteudo">
+
+<div class="fundo-dedos"></div>
 
 <!-- HOME -->
 <section>
     <h1>Oiiii, tudo bem? 👋</h1>
-    <p>Aqui é o dlkz77cc 🎬<br>
+    <p>
+    Aqui é o dlkz77cc 🎬<br>
     Sou editor de vídeo<br>
-    Role a página pra saber mais 👇</p>
+    Role a página 👇
+    </p>
 
-    <img src="imagem2.png" alt="Preços">
+    <img src="imagem2.png">
 
     <br>
-    <button class="btn" onclick="enviarWhats()">FAZER PEDIDO AGORA 🔥</button>
+    <button class="btn" onclick="zap()">CHAMAR NO WHATSAPP 🔥</button>
 </section>
 
-<!-- SOBRE MIM -->
+<!-- SOBRE -->
 <section class="fade">
     <h1>SOBRE MIM</h1>
 
     <div class="sobre">
         <div class="sobre-texto">
-            <p>
-            Sou editor de vídeo focado em qualidade, consistência e resultados.<br><br>
+            Sou editor focado em qualidade e impacto.<br><br>
 
-            Trabalho com edição de anime, futebol e fotos, sempre valorizando cada detalhe do seu conteúdo.<br><br>
+            Trabalho com anime, futebol e fotos.<br><br>
 
-            Utilizo Toji Motion para garantir cortes precisos e sincronização profissional.<br><br>
+            Utilizo Toji Motion para edições profissionais.<br><br>
 
-            ✔️ Qualidade em cada projeto<br>
-            ✔️ Entrega rápida<br>
-            ✔️ Preço acessível<br><br>
-
-            📩 Estou disponível para novos projetos
-            </p>
+            ✔️ Qualidade<br>
+            ✔️ Rapidez<br>
+            ✔️ Preço acessível
         </div>
 
-        <img src="imagem1.png" alt="Personagem">
+        <img src="imagem1.png">
     </div>
 </section>
 
 <!-- PREÇOS -->
 <section class="fade">
-    <h1>SERVIÇOS</h1>
-
-    <p>
+    <h1>PREÇOS</h1>
     📸 Foto: 2 reais<br>
-    💧 Sem marca d’água: +3 reais<br>
-    🎬 Edit de anime: 10 reais<br>
-    ⚽ Edit de futebol: 15 reais
-    </p>
+    💧 Sem marca d'água: +3<br>
+    🎬 Anime: 10<br>
+    ⚽ Futebol: 15
 </section>
 
 <!-- CONTATO -->
 <section class="fade">
     <h1>CONTATO</h1>
-    <p>Quer seu edit? 👇</p>
-
-    <button class="btn" onclick="enviarWhats()">CHAMAR NO WHATSAPP 📩</button>
+    <button class="btn" onclick="zap()">CHAMAR NO WHATSAPP 📩</button>
 </section>
 
+</div>
+
 <script>
-function enviarWhats() {
+setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("conteudo").style.display = "block";
+}, 2000);
+
+function zap() {
     let numero = "5511951319587";
     let mensagem = "Oi, vim pelo site DLKZ e quero um edit!";
-    let url = `https://wa.me/${5511951319587}?text=${encodeURIComponent(mensagem)}`;
-    window.open(url, "_blank");
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`);
 }
 
-const elements = document.querySelectorAll('.fade');
+const fades = document.querySelectorAll('.fade');
 
 window.addEventListener('scroll', () => {
-    elements.forEach(el => {
-        const pos = el.getBoundingClientRect().top;
-        const screen = window.innerHeight;
-
-        if (pos < screen - 100) {
+    fades.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
             el.classList.add('show');
         }
     });
