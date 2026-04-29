@@ -23,6 +23,8 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.8s ease;
 }
 
 .intro-box {
@@ -187,14 +189,18 @@ select, textarea {
 </div>
 
 <script>
-window.onload = () => {
+window.addEventListener("load", () => {
+    const intro = document.getElementById("intro");
+
     setTimeout(() => {
-        document.getElementById("intro").style.opacity = "0";
+        intro.style.opacity = "0";
+
         setTimeout(() => {
-            document.getElementById("intro").style.display = "none";
-        }, 500);
+            intro.remove();
+        }, 800);
+
     }, 2000);
-};
+});
 
 function abrir(tela) {
     document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
