@@ -3,59 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DLKZ MOTION</title>
+<title>DLKZ PANEL</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial;
-    background: black;
+    background: #0a0a0a;
     color: white;
 }
 
-/* FUNDO SUKUNA */
-body::before {
-    content: "";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,0,0,0.3), black 70%);
-    animation: pulse 3s infinite alternate;
-    z-index: -1;
-}
-
-@keyframes pulse {
-    from { opacity: 0.5; }
-    to { opacity: 1; }
-}
-
-/* CONTAINER */
+/* CENTRAL */
 .container {
     max-width: 420px;
     margin: auto;
-    padding: 30px;
+    margin-top: 60px;
+    text-align: center;
 }
 
 /* TÍTULO */
 h1 {
     color: red;
-    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px red;
 }
 
 /* CARD */
 .card {
     background: #111;
     padding: 20px;
-    margin-top: 20px;
     border-radius: 15px;
     border: 1px solid red;
+    box-shadow: 0 0 15px rgba(255,0,0,0.2);
 }
 
-/* SELECT / INPUT */
+/* MENU */
+.menu button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background: #111;
+    border: 1px solid red;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu button:hover {
+    background: #1a1a1a;
+    box-shadow: 0 0 10px red;
+}
+
+/* INPUT */
 select, textarea {
     width: 100%;
-    margin-top: 10px;
     padding: 10px;
+    margin-top: 10px;
     border-radius: 10px;
     border: none;
     background: #1a1a1a;
@@ -63,20 +67,33 @@ select, textarea {
 }
 
 /* BOTÃO */
-button {
+.btn {
     width: 100%;
-    margin-top: 20px;
-    padding: 15px;
+    margin-top: 15px;
+    padding: 12px;
     background: red;
     border: none;
     border-radius: 10px;
     color: white;
-    font-size: 16px;
     cursor: pointer;
 }
 
-button:hover {
+.btn:hover {
     background: darkred;
+}
+
+/* VOLTAR */
+.back {
+    background: transparent;
+    border: 1px solid red;
+}
+
+/* TELAS */
+.screen {
+    display: none;
+}
+.active {
+    display: block;
 }
 </style>
 </head>
@@ -85,19 +102,29 @@ button:hover {
 
 <div class="container">
 
-<h1>DLKZ MOTION 😈</h1>
+<h1>DLKZ PANEL 😈</h1>
+
+<!-- MENU -->
+<div id="menu" class="card screen active">
+    <div class="menu">
+        <button onclick="abrir('pagamento')">💰 Forma de pagamento</button>
+        <button onclick="abrir('pedido')">🎬 Fazer pedido</button>
+        <button onclick="zap()">📱 Chamar no WhatsApp</button>
+    </div>
+</div>
 
 <!-- PAGAMENTO -->
-<div class="card">
-    <h3>💰 Forma de pagamento</h3>
-    <select id="pagamento">
-        <option>PIX</option>
-    </select>
+<div id="pagamento" class="card screen">
+    <h3>💰 Pagamento</h3>
+    <p>PIX 💸</p>
+
+    <button class="btn back" onclick="voltar()">⬅️ Voltar</button>
 </div>
 
 <!-- PEDIDO -->
-<div class="card">
-    <h3>🎬 Tipo de edit</h3>
+<div id="pedido" class="card screen">
+    <h3>🎬 Pedido</h3>
+
     <select id="tipo">
         <option>Anime</option>
         <option>Futebol</option>
@@ -105,29 +132,41 @@ button:hover {
         <option>Foto</option>
     </select>
 
-    <h3>✍️ Descrição</h3>
     <textarea id="desc" placeholder="Descreva seu pedido..."></textarea>
-</div>
 
-<!-- BOTÃO -->
-<button onclick="enviar()">CHAMAR NO WHATSAPP 🔥</button>
+    <button class="btn" onclick="enviar()">Enviar pedido</button>
+    <button class="btn back" onclick="voltar()">⬅️ Voltar</button>
+</div>
 
 </div>
 
 <script>
+function abrir(tela) {
+    document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+    document.getElementById(tela).classList.add('active');
+}
+
+function voltar() {
+    document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+    document.getElementById('menu').classList.add('active');
+}
+
+function zap() {
+    let numero = "5511951319587";
+    let mensagem = "Oi, vim pelo painel DLKZ!";
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`, "_blank");
+}
+
 function enviar() {
-    let pagamento = document.getElementById("pagamento").value;
     let tipo = document.getElementById("tipo").value;
     let desc = document.getElementById("desc").value;
 
-    let mensagem = 
+    let mensagem =
 `📩 Pedido DLKZ
 
-💰 Pagamento: ${pagamento}
 🎬 Tipo: ${tipo}
 
-📝 Descrição:
-${desc}`;
+📝 ${desc}`;
 
     let numero = "5511951319587";
 
